@@ -1,34 +1,4 @@
-<!-- <div class="form-group">
-
-     <div class="form-group row">
-  <label for="example-text-input" class="col-2 col-form-label">Text</label>
-  <div class="col-10">
-    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
-  </div>
-</div>
-    
-        <label class="col-2 col-form-label">Email : </label>
-        <div>
-        <input type="text" formControlName="email" placeholder="email" class="form-control">
-    </div>
-
-
- 
-        <label for="gender" class="col-2 col-form-label">Geneder : </label> 
-          <div>
-        <input type="radio" value="male" id="gender" name="gender"> Male
-        <input type="radio" value="female" id="gender" name="gender"> Female
-
-    </div>
-
-
-    
-        <label class="col-2 col-form-label"> Mobile Number :</label>
-        <div>
-        <input type="text" formControlName="mobile" placeholder="email" class="form-control">
-    </div>
-
-</div> -->
+<!-- 
 <div class="container">
     <form>
 
@@ -103,4 +73,54 @@
 
 
     </form>
-</div>
+</div> -->
+
+
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    
+   
+
+    <div class="form">
+        <div class="right">
+            <label>
+                Name: <br>
+                <input type="text" formControlName="name" required>
+            </label>
+            <br>
+            <label>
+                Email: <br>
+                <input type="email" formControlName="email" required>
+            </label>
+            <br>
+            <label>
+                Gender: <br>
+                <input type="radio" name="gender" id="male" value="male" formControlName="gender">male <br>
+                <input type="radio" name="gender" id="female" value="female" formControlName="gender">female
+            </label>
+        </div>
+
+        <div class="left">
+            <div class="avatar-area"></div>
+            <br>
+            <label class="file">
+                Avatar: <br>
+                <input type="file" name="" id="" formControlName="avatar" required>
+            </label>
+            <br><br>
+            <label>
+                Mobile Number: <br>
+                <input type="text" formControlName="mobileNumber" required>
+            </label>
+            <label>
+                password: <br>
+                <input type="password" formControlName="mobileNumber" required>
+            </label>
+            <label>
+               Confirm password: <br>
+                <input type="password" formControlName="mobileNumber" required>
+            </label>
+            
+        </div>
+    </div>
+    <button type="submit"  class="btn btn-dark" [disabled]="!profileForm.valid">Submit</button>
