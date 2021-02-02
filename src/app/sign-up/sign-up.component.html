@@ -1,96 +1,22 @@
-<!-- 
-<div class="container">
-    <form>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-            </div>
-        </div>
-
-
-        <div>
-            <label>Gender</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                    value="option1"> Female
-            </label>
-        </div>
-        <div class="form-check form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                    value="option2"> Male
-            </label>
-        </div>
-
-
-
-        <div>
-
-
-        </div>
-
-        <div>
-
-
-
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Mobile Number</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Mobile Number">
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label"> ConfirmPassword</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-            </div>
-        </div>
-
-        <button type="button" class="btn btn-dark">Submit</button>
-
-
-    </form>
-</div> -->
-
-
-
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    
-   
 
     <div class="form">
         <div class="right">
             <label>
                 Name: <br>
-                <input type="text" formControlName="name" required>
+                <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
             </label>
             <br>
             <label>
                 Email: <br>
-                <input type="email" formControlName="email" required>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
             </label>
             <br>
             <label>
@@ -110,17 +36,33 @@
             <br><br>
             <label>
                 Mobile Number: <br>
-                <input type="text" formControlName="mobileNumber" required>
+                <input type="text" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" required />
+                <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                    <div *ngIf="f.number.errors.minlength">Mobile Number must be 10 Numbers</div>
+                    <div *ngIf="f.number.errors.required">Number is required</div>
+                </div>
             </label>
             <label>
                 password: <br>
-                <input type="password" formControlName="mobileNumber" required>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    <div *ngIf="f.password.errors.required">password is required</div>
+                </div>
             </label>
             <label>
-               Confirm password: <br>
-                <input type="password" formControlName="mobileNumber" required>
-            </label>
-            
+                Confirm password: <br>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    <div *ngIf="f.password.errors.required">password is required</div>
+                </div>            </label>
+
         </div>
     </div>
-    <button type="submit"  class="btn btn-dark" [disabled]="!profileForm.valid">Submit</button>
+    <button type="submit" class="btn btn-dark" >Submit</button>
+
+
+
+
+

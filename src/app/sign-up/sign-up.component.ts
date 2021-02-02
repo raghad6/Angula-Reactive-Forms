@@ -1,4 +1,4 @@
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -8,21 +8,22 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
+  submitted = false;
+
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
-    gender: new FormControl(''),
-    avatar: new FormControl(''),
-    mobileNumber: new FormControl('')
+    firstName: new FormControl('',[Validators.required]),
+    lastName: new FormControl('',[Validators.required]),
+    name: new FormControl('',[Validators.required]),
+    email: new FormControl('',[Validators.required]),
+    gender: new FormControl('',[Validators.required]),
+    avatar: new FormControl('',[Validators.required]),
+    number: new FormControl('' ,[Validators.required , Validators.minLength(10)]  ),
+    password: new FormControl('' ,[Validators.required , Validators.minLength(6)] ),
+    passwordval: new FormControl(''  ,[Validators.required , Validators.minLength(6)] )
   });
 
-  
-  onSubmit() {
-    console.warn(this.profileForm.value);
-    
-  }
+
 
   constructor() { }
 
@@ -30,7 +31,24 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  
-  
-  
+  get f() { return this.profileForm.controls; }
+
+  onSubmit() {
+    console.warn(this.profileForm.value);
+
+      this.submitted = true;
+
+      // stop here if form is invalid
+      if (this.profileForm.invalid) {
+          return;
+      }
+
+  }
+
+  onReset() {
+      this.submitted = false;
+      this.profileForm.reset();
+  }
+
+
 }
