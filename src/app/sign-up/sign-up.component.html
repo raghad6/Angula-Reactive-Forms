@@ -27,12 +27,13 @@
         </div>
 
         <div class="left">
-            <div class="avatar-area"></div>
+            <div class="avatar-area"><img [src]="imageUrl" ></div>
             <br>
             <label class="file">
-                Avatar: <br>
-                <input type="file" name="" id="" formControlName="avatar" required>
+                Chooce image: <br>
+                <input type="file" formControlName="avatar" required (change)="selectFile($event)" >  
             </label>
+            
             <br><br>
             <label>
                 Mobile Number: <br>

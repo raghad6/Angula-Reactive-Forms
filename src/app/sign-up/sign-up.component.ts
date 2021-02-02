@@ -10,6 +10,7 @@ import { Validators } from '@angular/forms';
 export class SignUpComponent implements OnInit {
 
   submitted = false;
+  imageUrl:any;
 
   profileForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
@@ -20,7 +21,8 @@ export class SignUpComponent implements OnInit {
     avatar: new FormControl('',[Validators.required]),
     number: new FormControl('' ,[Validators.required , Validators.minLength(10)]  ),
     password: new FormControl('' ,[Validators.required , Validators.minLength(6)] ),
-    passwordval: new FormControl(''  ,[Validators.required , Validators.minLength(6)] )
+    passwordval: new FormControl(''  ,[Validators.required , Validators.minLength(6)] ),
+    
   });
 
 
@@ -50,5 +52,24 @@ export class SignUpComponent implements OnInit {
       this.profileForm.reset();
   }
 
-
+  selectFile(event : any) {
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			return;
+		}
+		
+		var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.imageUrl = reader.result; 
+		}
+  }
+  
+  
 }
